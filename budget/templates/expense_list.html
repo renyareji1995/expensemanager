@@ -1,0 +1,59 @@
+{%extends 'base.html'%}
+
+{%block main_block%}
+
+
+<div class="container my-3">
+    <div class="w-50 mx-auto d-flex justify-content-between">
+        <form action="" style="width: 50%;height: 30px;">
+            <select name="category" id="" class="form-select" onchange="this.form.submit()">
+                <option value="all" {%if selected == 'all' %} selected {%endif%}>all</option>
+                <option value="food"{%if selected == 'food'%} selected {%endif%}>food</option>
+                <option value="travel"{%if selected == 'travel'%} selected {%endif%}>travel</option>
+                <option value="health"{%if selected == 'health'%} selected {%endif%}>health</option>
+                <option value="others"{%if selected == 'others'%} selected {%endif%}>others</option>
+            </select>
+            
+        </form>
+        <form action="" style="width: 70%; height: 30px;padding-left: 100px;">
+                <input type="text" placeholder="enter key word" name="search_text">
+                <button type="submit">search</button>
+        </form>
+       
+    </div>
+</div>
+<h1 class="text-center p-3">Welcome <span style="color:red">{{request.user}}</span></h1>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-stripped">
+                <tr class="table-primary">
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Created_Date</th>
+                    <th>Category</th>
+                    <th>User</th>
+                    <th></th>
+                </tr>
+                {%for ex in expenses %}
+                    <tr class="table-warning">
+                        <td>{{ex.title}}</td>
+                        <td>{{ex.amount}}</td>
+                        <td>{{ex.created_date}}</td>
+                        <td>{{ex.category}}</td> 
+                        <td>{{ex.user}}</td>
+
+                        <td>
+                            <a href="{%url 'expense-detail' ex.id%}" class="btn btn-outline-primary"><i class="fa-solid fa-eye"></i></a> 
+                            <a href="{%url 'expense-update' ex.id%}" class="btn btn-outline-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a href="{%url 'expense-delete' ex.id%}" class="btn btn-outline-primary"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                        
+                    </tr>
+                {%endfor%}
+            </table>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

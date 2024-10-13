@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+
+{%block main_block%}
+
+<div class="container mt-5" style="margin-left: 300px;">
+    <div class="row">
+        <div class="col-10">
+            <div class="card text-white bg-primary mb-3" style="max-width: 70%;height: 500px;">
+                <div class="card-header">Title: {{obj.title}}</div>
+                <div class="card-body">
+                  <h5 class="card-title">Amount: {{obj.amount}}</h5>
+                  <p class="card-text">Category: {{obj.category}}</p>
+                  <p class="card-text">User: {{obj.user}}</p>
+                  <p class="card-text">Created_date: {{obj.created_date}}</p>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
