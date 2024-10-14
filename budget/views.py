@@ -153,14 +153,14 @@ class ExpenseSummaryView(View):
 
     def get(self,request,*args,**kwargs):
 
-        qs=Expense.objects.all()
+        qs=Expense.objects.filter(user=request.user)
 
         total_expense_count=qs.count()
 
-        category_summary=Expense.objects.values("category").annotate(cat_count=Count("category"))
+        category_summary=qs.values("category").annotate(cat_count=Count("category"))
         print(category_summary)
 
-        category_total=Expense.objects.all().values("category").annotate(cat_total=Sum("amount"))
+        category_total=qs.values("category").annotate(cat_total=Sum("amount"))
         print(category_total)
 
         context={
